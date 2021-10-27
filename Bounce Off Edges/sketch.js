@@ -1,47 +1,46 @@
 var ball;
-var topEdge, bottomEdge, leftEdge, rightEdge;
+var edgeT,edgeR, edgeB,edgeL;
 
 function setup() {
   createCanvas(450, 400);
 
-  //ball
+  //ball sprite
   ball = createSprite(150, 250, 15, 15);
   ball.shapeColor = "orange";
 
-  //Top Edge
-  topEdge = createSprite(225, 0, 450, 5);
-  topEdge.shapeColor = "gray";
-  topEdge.immovable = true;
+  //Top edge
+  edgeT = createSprite(225, 0, 450, 5);
+  edgeT.shapeColor = "gray";
 
-  //Bottom Edge
-  bottomEdge = createSprite(225, 400, 450, 5);
-  bottomEdge.shapeColor = "gray";
-  bottomEdge.immovable = true;
+  //Left edge
+  edgeL = createSprite(0, 200, 5, 400);
+  edgeL.shapeColor = "gray";
 
-  //Left Edge
-  leftEdge = createSprite(0, 200, 5, 400);
-  leftEdge.shapeColor = "gray";
-  leftEdge.immovable = true;
+  //Right edge
+  edgeR = createSprite(450, 200, 5, 400);
+  edgeR.shapeColor = "gray";
 
-  //Right Edge
-  rightEdge = createSprite(450, 200, 5, 400);
-  rightEdge.shapeColor = "gray";
-  rightEdge.immovable = true;
+  //Bottom edge
+  edgeB = createSprite(225, 400, 450, 5);
+  edgeB.shapeColor = "gray";
+
 }
 
 function draw() {
   background("honeydew");
 
-  ball.bounce(leftEdge);
-  ball.bounce(rightEdge);
-  ball.bounce(bottomEdge);
-  ball.bounce(topEdge);
-
   if (mouseIsPressed) {
-    ball.velocity.x = 1; // Left or Right
-    ball.velocity.y = 1; // Top to Bottom
-    ball.setSpeed(4);
+    ball.velocityX = 4; 
+    ball.velocityY = 4; 
   }
+
+  //make the ball bounce off the edges
+  ball.bounceOff(edgeL);
+  ball.bounceOff(edgeR);
+  ball.bounceOff(edgeT);
+  ball.bounceOff(edgeB);
 
   drawSprites();
 }
+
+
